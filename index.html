@@ -1,99 +1,85 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Jogo de correspondência</title>
-    <meta charset="UTF-8">
-    <style>
-      table {
-        border-collapse: collapse;
-      }
-      td {
-        border: 1px solid black;
-        padding: 10px;
-        text-align: center;
-      }
-      img {
-        width: 100px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Jogo de correspondência</h1>
-    <p>Arraste cada imagem para o número correspondente.</p>
-    <table>
-      <tr>
-        <td>1</td>
-        <td><img src="https://i.imgur.com/BOEz8U6.png"></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td><img src="https://i.imgur.com/lIzskS4.png"></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td><img src="https://i.imgur.com/t47iJZc.png"></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td><img src="https://i.imgur.com/yR8aeui.png"></td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td><img src="https://i.imgur.com/vl4vQ03.png"></td>
-      </tr>
-    </table>
-    <script>
-      const imgs = document.querySelectorAll('img');
-      const tds = document.querySelectorAll('td:first-child');
-      
-      imgs.forEach(img => {
-        img.addEventListener('dragstart', dragStart);
-      });
-      
-      tds.forEach(td => {
-        td.addEventListener('dragover', dragOver);
-        td.addEventListener('dragenter', dragEnter);
-        td.addEventListener('dragleave', dragLeave);
-        td.addEventListener('drop', drop);
-      });
-      
-      function dragStart() {
-        this.classList.add('dragging');
-      }
-      
-      function dragOver(e) {
-        e.preventDefault();
-      }
-      
-      function dragEnter(e) {
-        e.preventDefault();
-        this.classList.add('hovered');
-      }
-      
-      function dragLeave() {
-        this.classList.remove('hovered');
-      }
-      
-      function drop() {
-        const dragging = document.querySelector('.dragging');
-        this.innerText = dragging.parentNode.innerText;
-        dragging.parentNode.innerText = '';
-        this.classList.remove('hovered');
-        dragging.classList.remove('dragging');
-        checkGame();
-      }
-      
-      function checkGame() {
-        let complete = true;
-        tds.forEach(td => {
-          if (td.innerText === '') {
-            complete = false;
-          }
-        });
-        if (complete) {
-          alert('Parabéns! Você completou o jogo!');
-        }
-      }
-    </script>
-  </body>
-</html>
+<head>
+	<title>Jogo da Correspondência</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		.container {
+			display: flex;
+			justify-content: space-around;
+		}
+
+		.coluna {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.card {
+			width: 120px;
+			height: 120px;
+			background-color: #F4F4F4;
+			margin: 10px;
+			border-radius: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 3rem;
+			color: #333333;
+			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+		}
+
+		.card:hover {
+			transform: scale(1.1);
+			box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+		}
+	</style>
+</head>
+<body>
+	<h1>Jogo da Correspondência</h1>
+	<div class="container">
+		<div class="coluna">
+			<div class="card" id="card1">
+				<img src="https://i.imgur.com/zFQRKj0.png" alt="imagem 1">
+			</div>
+			<div class="card" id="card2">
+				<img src="https://i.imgur.com/9vGi7Vb.png" alt="imagem 2">
+			</div>
+			<div class="card" id="card3">
+				<img src="https://i.imgur.com/vn8nSJO.png" alt="imagem 3">
+			</div>
+			<div class="card" id="card4">
+				<img src="https://i.imgur.com/vn8nSJO.png" alt="imagem 3">
+			</div>
+		</div>
+		<div class="coluna">
+			<div class="card" id="card5">
+				<img src="https://i.imgur.com/zFQRKj0.png" alt="imagem 1">
+			</div>
+			<div class="card" id="card6">
+				<img src="https://i.imgur.com/9vGi7Vb.png" alt="imagem 2">
+			</div>
+			<div class="card" id="card7">
+				<img src="https://i.imgur.com/t1Qv4Y3.png" alt="imagem 4">
+			</div>
+			<div class="card" id="card8">
+				<img src="https://i.imgur.com/t1Qv4Y3.png" alt="imagem 4">
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const cards = document.querySelectorAll('.card');
+		let cardEscolhido1 = null;
+		let cardEscolhido2 = null;
+		let acertos = 0;
+
+		function escolherCard
