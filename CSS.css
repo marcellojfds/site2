@@ -1,0 +1,29 @@
+#card-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100px;
+	height: 120px;
+	margin: 10px;
+	padding: 10px;
+	background-color: lightblue;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	transition: transform 0.2s;
+}
+.card:hover {
+	transform: scale(1.1);
+}
+.selected {
+	background-color: yellow;
+}
